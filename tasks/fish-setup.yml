@@ -1,0 +1,42 @@
+- name: Install Fish
+  package:
+    state: present
+    name:
+      - "fish"
+  become: true
+  become_user: root
+  tags: &tags_for_fish_tasks ["install", "productivity", "dotfiles", "fish"]
+
+- name: make the fisher directory
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.config/fish/functions"
+    mode: 0755
+    state: directory
+    recurse: yes
+
+- name: install fisherman
+  become: true
+  become_user: "{{ user.name }}"
+  get_url: url="{{ item.url }}"
+    dest="{{ item.dest }}"
+  with_items:
+    - {
+        url: "https://git.io/fisherman",
+        dest: "{{ lookup('env', 'HOME') }}/.config/fish/functions/fisher.fish",
+      }
+    - {
+        url: "https://git.io/snippet",
+        dest: "{{lookup('env', 'HOME')}}/.config/fish/config.fish",
+      }
+
+- name: Change shell to fish
+  shell: chsh -s $(which fish)
+  become: true
+  become_user: root
+  tags: *tags_for_fish_tasks
+
+- name: Install fisher plugins
+  shell: fisher install danhper/fish-ssh-agent jorgebucaran/nvm.fish jethrokuan/z
+  become: true
+  # become_user: root
+  tags: *tags_for_fish_tasks

@@ -1,0 +1,34 @@
+- hosts: localhost
+  vars:
+    source_key: "./.ssh/portable_id_ed25519"
+    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/portable_id_ed25519"
+
+  # pre_tasks:
+  #   - name: Update pacman
+  #     become: true
+  #     pacman:
+  #       force: true
+  #       update_cache: true
+  #     tags:
+  #       - install
+  #       - core
+
+  tasks:
+    - import_tasks: tasks/ssh.yml
+    - import_tasks: tasks/git-setup.yml
+    - import_tasks: tasks/fish-setup.yml
+    - import_tasks: tasks/dotfiles.yml
+
+    # - include_tasks: tasks/git-setup.yml
+    # - include_tasks: tasks/core-setup.yml
+    # - include_tasks: tasks/node-setup.yml
+    # - include_tasks: tasks/npm-packages.yml
+    # - include_tasks: tasks/zsh-setup.yml
+    # - include_tasks: tasks/slack-setup.yml
+    # - include_tasks: tasks/personal-projects.yml
+    # - include_tasks: tasks/nvim-setup.yml
+    # - include_tasks: tasks/brave.yml
+    # - include_tasks: tasks/debugger.yml
+    # - include_tasks: tasks/dotfiles.yml
+    # - include_tasks: tasks/productivity-tools.yml
+    # - include_tasks: tasks/lsp.yml
