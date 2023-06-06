@@ -1,13 +1,13 @@
 - name: Create ~/.fonts directory
   file:
-    path: "{{ lookup('env', 'HOME') }}/.fonts"
+    path: "{{ HOME }}/.fonts"
     state: directory
     mode: 0755
 
 - name: Download Fira Code font
   unarchive:
     src: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip"
-    dest: "{{ lookup('env', 'HOME') }}/.fonts"
+    dest: "{{ HOME }}/.fonts"
     remote_src: yes
 
 - name: Update font cache

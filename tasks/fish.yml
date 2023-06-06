@@ -5,7 +5,7 @@
 
 - name: Create fish functions directory
   file:
-    path: "{{ lookup('env', 'HOME') }}/.config/fish/functions"
+    path: "{{ HOME }}/.config/fish/functions"
     state: directory
     mode: 0755
 
@@ -15,7 +15,7 @@
 - name: Install fisher
   get_url:
     url: "https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish"
-    dest: "{{ lookup('env', 'HOME') }}/.config/fish/functions"
+    dest: "{{ HOME }}/.config/fish/functions"
 
 - name: Install fisher plugins
   shell: fish -c "fisher install danhper/fish-ssh-agent jorgebucaran/nvm.fish jethrokuan/z"
@@ -23,5 +23,5 @@
 - name: Change default shell to fish
   become: yes
   user:
-    name: "{{ lookup('env', 'USER') }}"
+    name: "{{ USER }}"
     shell: /usr/bin/fish

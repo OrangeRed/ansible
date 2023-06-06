@@ -1,11 +1,9 @@
 - name: Clone .dotfiles
   git:
     repo: "git@github.com:OrangeRed/.dotfiles.git"
-    dest: "{{ lookup('env', 'HOME') }}/.dotfiles"
+    dest: "{{ HOME }}/.dotfiles"
     version: main
     force: yes
-    update: yes
-    # recursive: yes
     accept_hostkey: yes
 
 - name: Install stow
@@ -15,6 +13,6 @@
 
 - name: Stow dotfiles
   shell: |
-    cd $HOME/.dotfiles
-    stow -t $HOME */ --adopt
+    cd ~/.dotfiles
+    stow -t ~/ */ --adopt
     git reset --hard

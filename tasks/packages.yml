@@ -29,9 +29,8 @@
 - name: Install mpvacious
   git:
     repo: https://github.com/Ajatt-Tools/mpvacious.git
-    dest: "{{ lookup('env', 'HOME') }}/.config/mpv/scripts/subs2srs"
+    dest: "{{ HOME }}/.config/mpv/scripts/subs2srs"
     force: yes
-    update: yes
     accept_hostkey: yes
   tags:
     - japanese
