@@ -2,28 +2,24 @@
   set_fact:
     source_key: "./.ssh/port_key"
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/port_key"
-  tags: &tags_for_ssh_tasks ["dotfiles", "install", "ssh"]
 
 - name: Ensure .ssh directory exists
   file:
     dest: "{{ dest_key | dirname }}"
     mode: 0700
     state: directory
-  tags: *tags_for_ssh_tasks
 
 - name: Install ssh key
   copy:
     src: "{{ source_key }}"
     dest: "{{ dest_key }}"
     mode: 0600
-  tags: *tags_for_ssh_tasks
 
 - name: Install ssh key public
   copy:
     src: "{{ source_key }}.pub"
     dest: "{{ dest_key }}.pub"
     mode: 0644
-  tags: *tags_for_ssh_tasks
 
 - name: Set authorized key took from file
   authorized_key:
@@ -32,4 +28,3 @@
     key: "{{ lookup('file', dest_key + '.pub') }}"
   with_fileglob:
     - "{{ lookup('env', 'HOME') }}/.ssh/*.pub"
-  tags: *tags_for_ssh_tasks
