@@ -1,4 +1,4 @@
-- name: Install Fish shell package
+- name: Install Fish
   become: yes
   become_user: "{{ lookup('env', 'USER') }}"
   package:
@@ -6,20 +6,14 @@
     state: present
   tags: &tags_for_fish_tasks ["install", "productivity", "dotfiles", "fish"]
 
-- name: make the fisher directory
-  file:
-    path: "{{ lookup('env', 'HOME') }}/.config/fish/functions"
-    owner: "{{ lookup('env', 'USER') }}"
-    mode: 0755
-    state: directory
-    recurse: yes
+- name: Remove Fish Greeting
+  shell: fish -c "set -U fish_greeting"
   tags: *tags_for_fish_tasks
 
 - name: Install Fisher
   become: yes
   become_user: "{{ lookup('env', 'USER') }}"
-  get_url: 
-    url="https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish"
+  get_url: url="https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish"
     dest="{{ lookup('env', 'HOME') }}/.config/fish/functions"
   tags: *tags_for_fish_tasks
 
@@ -27,10 +21,6 @@
   become: yes
   become_user: "{{ lookup('env', 'USER') }}"
   shell: fish -c "fisher install danhper/fish-ssh-agent jorgebucaran/nvm.fish jethrokuan/z"
-  tags: *tags_for_fish_tasks
-
-- name: Remove Fish Greeting
-  shell: fish -c "set -U fish_greeting"
   tags: *tags_for_fish_tasks
 
 - name: Change shell to fish
