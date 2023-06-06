@@ -1,8 +1,5 @@
 - hosts: localhost
-  vars:
-    source_key: "./.ssh/portable_id_ed25519"
-    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/portable_id_ed25519"
-
+ 
   # pre_tasks:
   #   - name: Update pacman
   #     become: true
@@ -19,7 +16,6 @@
     - import_tasks: tasks/fish-setup.yml
     - import_tasks: tasks/dotfiles.yml
 
-    # - include_tasks: tasks/git-setup.yml
     # - include_tasks: tasks/core-setup.yml
     # - include_tasks: tasks/node-setup.yml
     # - include_tasks: tasks/npm-packages.yml

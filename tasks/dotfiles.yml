@@ -2,10 +2,7 @@
   package:
     state: present
     name: stow
-  tags:
-    - install
-    - dotfiles
-    - stow
+  tags: &tags_for_dotfile_tasks ["dotfiles", "install", "stow"]
 
 - name: Cloning .dotfiles
   ansible.builtin.git:
@@ -15,16 +12,22 @@
     update: yes
     accept_hostkey: yes
     version: main
-  tags:
-    - install
-    - dotfiles
-    - stow
+  tags: *tags_for_dotfile_tasks
+
+- name: Unstow any existing dotfiles
+  shell: |
+    cd $HOME/.dotfiles
+    stow -Dt $HOME */ 
+  tags: *tags_for_dotfile_tasks
 
 - name: Stow dotfiles
   shell: |
     cd $HOME/.dotfiles
-    stow -t $HOME */
-  tags:
-    - install
-    - dotfiles
-    - stow
+    stow -t $HOME */ --adopt
+  tags: *tags_for_dotfile_tasks
+
+- name: Reset stow adoption but keep symlinks
+  shell: |
+    cd $HOME/.dotfiles
+    git reset --hard
+  tags: *tags_for_dotfile_tasks
