@@ -1,1 +1,3 @@
-.ssh/
+# Ignore all files except those with periods
+.ssh/*
+!.ssh/*.*
