@@ -1,0 +1,21 @@
+- name: Install Fish
+  package:
+    name: fish
+    state: present
+
+- name: Remove Fish Greeting
+  shell: fish -c "set -U fish_greeting"
+
+- name: Install Fisher
+  get_url:
+    url: "https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish"
+    dest: "{{ lookup('env', 'HOME') }}/.config/fish/functions"
+
+- name: Install Fisher Plugins
+  shell: fish -c "fisher install danhper/fish-ssh-agent jorgebucaran/nvm.fish jethrokuan/z"
+
+- name: Change shell to fish
+  become: yes
+  user:
+    name: "{{ lookup('env', 'USER') }}"
+    shell: /usr/bin/fish
