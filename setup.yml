@@ -1,14 +1,4 @@
 - hosts: localhost
- 
-  # pre_tasks:
-  #   - name: Update pacman
-  #     become: true
-  #     pacman:
-  #       force: true
-  #       update_cache: true
-  #     tags:
-  #       - install
-  #       - core
 
   tasks:
     - import_tasks: tasks/ssh.yml
