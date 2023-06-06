@@ -3,7 +3,7 @@
     name: pnpm
     global: yes
 
-- name: Install eslint
+- name: Install ESlint
   npm:
     name: eslint
     global: yes

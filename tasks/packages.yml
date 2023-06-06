@@ -1,4 +1,4 @@
-- name: Install Command Line packages
+- name: Install command line packages
   become: yes
   package:
     state: present
@@ -12,11 +12,10 @@
       # TODO tmux
       # TODO ranger
   tags:
-    - install
     - cli
 
 # Packages for studying Japanese
-- name: Install Japanese packages
+- name: Install japanese packages
   become: yes
   package:
     state: present

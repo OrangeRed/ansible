@@ -30,13 +30,16 @@
         - dotfiles
         - font
 
+    - import_tasks: tasks/packages.yml
+      become: yes
+      tags:
+        - install
+
     - import_tasks: tasks/npm.yml
       become: yes
       tags:
         - install
         - npm
-
-    - import_tasks: tasks/packages.yml
 
     # TODO
     # - include_tasks: tasks/nvim.yml

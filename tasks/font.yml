@@ -1,10 +1,10 @@
-- name: Create ~/.fonts directory if it does not exist
+- name: Create ~/.fonts directory
   file:
     path: "{{ lookup('env', 'HOME') }}/.fonts"
     state: directory
     mode: 0755
 
-- name: Download and unzip Fira Code
+- name: Download Fira Code font
   unarchive:
     src: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip"
     dest: "{{ lookup('env', 'HOME') }}/.fonts"

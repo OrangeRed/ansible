@@ -13,12 +13,8 @@
     state: present
     name: stow
 
-- name: Stow and adopt dotfiles
+- name: Stow dotfiles
   shell: |
     cd $HOME/.dotfiles
     stow -t $HOME */ --adopt
-
-- name: Reset adoption but keep symlinks
-  shell: |
-    cd $HOME/.dotfiles
     git reset --hard

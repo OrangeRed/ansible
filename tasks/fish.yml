@@ -1,20 +1,26 @@
-- name: Install Fish
+- name: Install fish
   package:
     name: fish
     state: present
 
-- name: Remove Fish Greeting
+- name: Create fish functions directory
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.config/fish/functions"
+    state: directory
+    mode: 0755
+
+- name: Remove fish greeting
   shell: fish -c "set -U fish_greeting"
 
-- name: Install Fisher
+- name: Install fisher
   get_url:
     url: "https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish"
     dest: "{{ lookup('env', 'HOME') }}/.config/fish/functions"
 
-- name: Install Fisher Plugins
+- name: Install fisher plugins
   shell: fish -c "fisher install danhper/fish-ssh-agent jorgebucaran/nvm.fish jethrokuan/z"
 
-- name: Change shell to fish
+- name: Change default shell to fish
   become: yes
   user:
     name: "{{ lookup('env', 'USER') }}"

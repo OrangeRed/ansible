@@ -1,4 +1,4 @@
-- name: Set git personal email
+- name: Git config personal email
   git_config:
     name: user.email
     scope: global
@@ -6,7 +6,7 @@
   tags:
     - git-personal
 
-- name: Set git personal name
+- name: Git config personal name
   git_config:
     name: user.name
     scope: global
