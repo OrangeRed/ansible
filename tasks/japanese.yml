@@ -1,0 +1,16 @@
+- name: Install anki and mpv
+  become: yes
+  package:
+    state: present
+    name:
+      - anki
+      - mpv
+
+- name: Install mpvacious
+  git:
+    repo: https://github.com/Ajatt-Tools/mpvacious.git
+    dest: "{{ HOME }}/.config/mpv/scripts/subs2srs"
+    force: yes
+    accept_hostkey: yes
+
+  # TODO Install fcitx (Japanese IME)

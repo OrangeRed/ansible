@@ -18,6 +18,12 @@
         - install
         - dotfiles
         - fish
+
+    - import_tasks: tasks/cli-tools.yml
+      tags:
+        - dotfiles
+        - cli
+
     - import_tasks: tasks/dotfiles.yml
       tags:
         - install
@@ -28,15 +34,16 @@
         - install
         - dotfiles
         - font
-    - import_tasks: tasks/packages.yml
-      become: yes
-      tags:
-        - install
+
     - import_tasks: tasks/npm.yml
       become: yes
       tags:
         - install
         - npm
+
+    - import_tasks: tasks/japanese.yml
+      tags:
+        - japanese
 
     # TODO
     # - include_tasks: tasks/nvim.yml

@@ -16,3 +16,8 @@
     cd ~/.dotfiles
     stow -t ~/ */ --adopt
     git reset --hard
+
+- name: Source fish envs
+  shell: |
+    cd ~/.dotfiles
+    fish -c "source envs/envs.fish"
