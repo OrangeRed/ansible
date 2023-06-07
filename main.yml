@@ -6,16 +6,15 @@
   tasks:
     - import_tasks: tasks/ssh.yml
       tags:
-        - install
         - dotfiles
         - ssh
+
     - import_tasks: tasks/git.yml
       tags:
-        - install
         - dotfiles
+
     - import_tasks: tasks/fish.yml
       tags:
-        - install
         - dotfiles
         - fish
 
@@ -26,19 +25,16 @@
 
     - import_tasks: tasks/dotfiles.yml
       tags:
-        - install
         - dotfiles
         - stow
+
     - import_tasks: tasks/font.yml
       tags:
-        - install
         - dotfiles
         - font
 
     - import_tasks: tasks/npm.yml
-      become: yes
       tags:
-        - install
         - npm
 
     - import_tasks: tasks/japanese.yml

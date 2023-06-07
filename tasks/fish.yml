@@ -1,6 +1,7 @@
 - name: Install fish
   package:
-    name: fish
+    name:
+      - fish
     state: present
 
 - name: Create fish functions directory
