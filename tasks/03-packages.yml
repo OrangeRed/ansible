@@ -1,0 +1,50 @@
+# Arch Install
+- name: Install pacman pkgs
+  become: yes
+  pacman:
+    state: present
+    name:
+      - cmatrix
+      - bat
+      - btop
+      - exa
+      - fd
+      - fish
+      - fzf
+      - lazygit
+      - neofetch
+      - stow
+      - powertop
+  when: ansible_facts['distribution'] == "Archlinux"
+
+# Ubuntu Install
+- name: Install apt pkgs
+  become: yes
+  apt:
+    state: present
+    name:
+      - cmatrix
+      - bat
+      - btop
+      - exa
+      - fd-find # fd is taken
+      - fish
+      - fzf
+      # - lazygit
+      - neofetch
+      - stow
+      - powertop
+  when: ansible_facts['distribution'] == "Ubuntu"
+
+- name: Create ~/.local/bin directory
+  file:
+    path: "{{ HOME }}/.local/bin"
+    state: directory
+    mode: 0755
+  when: ansible_facts['distribution'] == "Ubuntu"
+
+- name: Make symlinks
+  become: yes
+  shell: |
+    ln -s $(which fdfind) ~/.local/bin/fd
+  when: ansible_facts['distribution'] == "Ubuntu"

@@ -1,9 +1,3 @@
-- name: Install fish
-  package:
-    name:
-      - fish
-    state: present
-
 - name: Create fish functions directory
   file:
     path: "{{ HOME }}/.config/fish/functions"

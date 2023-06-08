@@ -3,41 +3,35 @@
     HOME: "{{ lookup('env', 'HOME') }}"
     USER: "{{ lookup('env', 'USER') }}"
 
+  become: yes
   tasks:
-    - import_tasks: tasks/ssh.yml
+    - import_tasks: tasks/01-ssh.yml
       tags:
         - dotfiles
         - ssh
-
-    - import_tasks: tasks/git.yml
+    - import_tasks: tasks/02-git.yml
       tags:
         - dotfiles
-
-    - import_tasks: tasks/fish.yml
-      tags:
-        - dotfiles
-        - fish
-
-    - import_tasks: tasks/cli-tools.yml
+    - import_tasks: tasks/03-packages.yml
       tags:
         - dotfiles
         - cli
-
-    - import_tasks: tasks/dotfiles.yml
+    - import_tasks: tasks/04-fish.yml
+      tags:
+        - dotfiles
+        - fish
+    - import_tasks: tasks/05-dotfiles.yml
       tags:
         - dotfiles
         - stow
-
-    - import_tasks: tasks/font.yml
+    - import_tasks: tasks/06-font.yml
       tags:
         - dotfiles
         - font
-
-    - import_tasks: tasks/npm.yml
+    - import_tasks: tasks/07-npm.yml
       tags:
         - npm
-
-    - import_tasks: tasks/japanese.yml
+    - import_tasks: tasks/08-japanese.yml
       tags:
         - japanese
 

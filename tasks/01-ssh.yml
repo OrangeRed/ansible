@@ -9,15 +9,15 @@
     state: directory
     mode: 0700
 
-# - name: Install private ssh key
-#   copy:
-#     src: "{{ source_key }}"
-#     dest: "{{ dest_key }}"
-#     mode: 0600
+- name: Install private ssh key
+  copy:
+    src: "{{ source_key }}"
+    dest: "{{ dest_key }}"
+    mode: 0600
 
-- name: Move private ssh key
-  shell: |
-    mv {{ source_key }} ~/.ssh/
+# - name: Move private ssh key
+#   shell: |
+#     mv {{ source_key }} ~/.ssh/
 
 - name: Install public ssh key
   copy:

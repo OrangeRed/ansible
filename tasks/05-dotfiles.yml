@@ -6,11 +6,6 @@
     force: yes
     accept_hostkey: yes
 
-- name: Install stow
-  package:
-    state: present
-    name: stow
-
 - name: Stow dotfiles
   shell: |
     cd ~/.dotfiles
