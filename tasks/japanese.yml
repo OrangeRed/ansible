@@ -1,10 +1,12 @@
-- name: Install anki and mpv
+- name: Install anki, mpv, fcitx5
   become: yes
   package:
     state: present
     name:
       - anki
       - mpv
+      - fcitx5-mozc
+      - fcitx5-configtool
 
 - name: Install mpvacious
   git:
@@ -12,5 +14,3 @@
     dest: "{{ HOME }}/.config/mpv/scripts/subs2srs"
     force: yes
     accept_hostkey: yes
-
-  # TODO Install fcitx (Japanese IME)
