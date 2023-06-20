@@ -1,17 +1,14 @@
 ```bash
 # Install ansible
 $ sudo pacman -Sy ansible
+$ sudo apt install ansible
 
-# Decrypt private ssh key
-$ ansible-vault decrypt .ssh/port_key.lock --output .ssh/port_key
-
-# Add decrypted key to ssh agent
-$ ssh-add .ssh/port_key
+# Run pre playbook script
+$ chomd +x ./pre.sh && ./pre.sh
 
 # Run playbook
-$ ansible-playbook main.yml --ask-become-pass
+$ ansible-playbook main.yml --ask-become-pass --skip-tags japanese
 
-# If you want to make changes
-# Change remote url from https to ssh
+# If you want to make changes update the remote url
 $ git remote set-url git@github.com:OrangeRed/ansible.git
 ```
