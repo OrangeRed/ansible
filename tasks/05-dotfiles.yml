@@ -1,18 +1,20 @@
-- name: Clone .dotfiles
-  git:
-    repo: "git@github.com:OrangeRed/.dotfiles.git"
-    dest: "{{ HOME }}/.dotfiles"
-    version: main
-    force: yes
-    accept_hostkey: yes
+- name: Set up and stow Dotfiles
+  tags:
+    - dotfiles
+  block:
+    - name: Clone .dotfiles
+      git:
+        repo: "git@github.com:OrangeRed/.dotfiles.git"
+        dest: "{{ HOME }}/.dotfiles"
+        version: main
+        force: yes
+        accept_hostkey: yes
 
-- name: Stow dotfiles
-  shell: |
-    cd ~/.dotfiles
-    stow -t ~/ */ --adopt
-    git reset --hard
+    - name: Stow dotfiles
+      shell: |
+        cd ~/.dotfiles
+        stow -t ~/ */ --adopt
+        git reset --hard
 
-- name: Source fish envs
-  shell: |
-    cd ~/.dotfiles
-    fish -c "source envs/envs.fish"
+    - name: Source fish envs
+      shell: fish -c "source ~/.dotfiles/envs/envs.fish"

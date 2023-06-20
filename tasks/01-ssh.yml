@@ -1,34 +1,40 @@
-- name: Set dest_key and source_key
-  set_fact:
-    source_key: "./.ssh/port_key"
-    dest_key: "{{ HOME }}/.ssh/port_key"
+- name: Set up and Install SSH key
+  tags:
+    - ssh
+    - dotfiles
+  block:
+    - name: Set dest_key and source_key
+      set_fact:
+        source_key: "./.ssh/port_key"
+        dest_key: "{{ HOME }}/.ssh/port_key"
 
-- name: Create .ssh directory
-  file:
-    dest: "{{ dest_key | dirname }}"
-    state: directory
-    mode: 0700
+    - name: Create .ssh directory
+      file:
+        dest: "{{ dest_key | dirname }}"
+        state: directory
+        mode: 0700
 
-- name: Install private ssh key
-  copy:
-    src: "{{ source_key }}"
-    dest: "{{ dest_key }}"
-    mode: 0600
+    - name: Install private ssh key
+      copy:
+        src: "{{ source_key }}"
+        dest: "{{ dest_key }}"
+        mode: 0600
 
-# - name: Move private ssh key
-#   shell: |
-#     mv {{ source_key }} ~/.ssh/
+    - name: Install public ssh key
+      copy:
+        src: "{{ source_key }}.pub"
+        dest: "{{ dest_key }}.pub"
+        mode: 0644
 
-- name: Install public ssh key
-  copy:
-    src: "{{ source_key }}.pub"
-    dest: "{{ dest_key }}.pub"
-    mode: 0644
+    - name: Set authorized key from file
+      authorized_key:
+        user: "{{ USER }}"
+        state: present
+        key: "{{ lookup('file', dest_key + '.pub') }}"
+      with_fileglob:
+        - "{{ HOME }}/.ssh/*.pub"
 
-- name: Set authorized key from file
-  authorized_key:
-    user: "{{ USER }}"
-    state: present
-    key: "{{ lookup('file', dest_key + '.pub') }}"
-  with_fileglob:
-    - "{{ HOME }}/.ssh/*.pub"
+    - name: Remove private ssh key from repo
+      file:
+        path: "{{ source_key }}"
+        state: absent

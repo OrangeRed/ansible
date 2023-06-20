@@ -1,6 +1,9 @@
-# Arch Install
 - name: Install pacman pkgs
   become: yes
+  tags:
+    - cli
+    - dotfiles
+  when: ansible_facts['distribution'] == "Archlinux"
   pacman:
     state: present
     name:
@@ -15,36 +18,42 @@
       - neofetch
       - stow
       - powertop
-  when: ansible_facts['distribution'] == "Archlinux"
 
-# Ubuntu Install
-- name: Install apt pkgs
-  become: yes
-  apt:
-    state: present
-    name:
-      - cmatrix
-      - bat
-      - btop
-      - exa
-      - fd-find # fd is taken
-      - fish
-      - fzf
-      # - lazygit
-      - neofetch
-      - stow
-      - powertop
-  when: ansible_facts['distribution'] == "Ubuntu"
+# Debian based Install
+- name: Install api pkgs
+  tags:
+    - cli
+    - dotfiles
+  when: ansible_facts['os_family'] == "Debian"
+  block:
+    - name: Install apt pkgs
+      become: yes
+      apt:
+        state: present
+        name:
+          - cmatrix
+          - bat
+          - btop
+          - exa
+          - fd-find # fd is taken
+          - fish
+          - fzf
+          - neofetch
+          - stow
+          - powertop
+          - xclip
 
-- name: Create ~/.local/bin directory
-  file:
-    path: "{{ HOME }}/.local/bin"
-    state: directory
-    mode: 0755
-  when: ansible_facts['distribution'] == "Ubuntu"
+    # Turn fd-find into fd
+    - name: Create ~/.local/bin directory
+      file:
+        path: "{{ HOME }}/.local/bin"
+        state: directory
+        mode: 0755
 
-- name: Make symlinks
-  become: yes
-  shell: |
-    ln -s $(which fdfind) ~/.local/bin/fd
-  when: ansible_facts['distribution'] == "Ubuntu"
+    - name: Create Symlink for fd
+      file:
+        src: /usr/bin/fdfind
+        dest: "{{ HOME }}/.local/bin/fd"
+        state: link
+        force: yes
+

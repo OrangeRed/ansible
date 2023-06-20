@@ -1,15 +1,20 @@
-- name: Create ~/.fonts directory
-  file:
-    path: "{{ HOME }}/.fonts"
-    state: directory
-    mode: 0755
+- name: Download font and update cache
+  tags:
+    - font
+    - dotfiles
+  block:
+    - name: Create ~/.fonts directory
+      file:
+        path: "{{ HOME }}/.fonts"
+        state: directory
+        mode: 0755
 
-- name: Download Fira Code font
-  unarchive:
-    src: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip"
-    dest: "{{ HOME }}/.fonts"
-    remote_src: yes
+    - name: Download Fira Code font
+      unarchive:
+        src: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip"
+        dest: "{{ HOME }}/.fonts"
+        remote_src: yes
 
-- name: Update font cache
-  become: yes
-  shell: fc-cache -fv
+    - name: Update font cache
+      become: yes
+      shell: fc-cache -fv

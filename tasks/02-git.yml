@@ -1,15 +1,15 @@
-- name: Git config personal email
-  git_config:
-    name: user.email
-    scope: global
-    value: "kagno.dmitriy@gmail.com"
+- name: Git config personal
   tags:
     - git-personal
+  block:
+    - name: Git config personal email
+      git_config:
+        name: user.email
+        scope: global
+        value: "kagno.dmitriy@gmail.com"
 
-- name: Git config personal name
-  git_config:
-    name: user.name
-    scope: global
-    value: "Dmitriy"
-  tags:
-    - git-personal
+    - name: Git config personal name
+      git_config:
+        name: user.name
+        scope: global
+        value: "Dmitriy"

@@ -1,22 +1,27 @@
-- name: Create fish functions directory
-  file:
-    path: "{{ HOME }}/.config/fish/functions"
-    state: directory
-    mode: 0755
+- name: Set up fish and fish plugins
+  tags:
+    - fish
+    - dotfiles
+  block:
+    - name: Create fish functions directory
+      file:
+        path: "{{ HOME }}/.config/fish/functions"
+        state: directory
+        mode: 0755
 
-- name: Remove fish greeting
-  shell: fish -c "set -U fish_greeting"
+    - name: Remove fish greeting
+      shell: fish -c "set -U fish_greeting"
 
-- name: Install fisher
-  get_url:
-    url: "https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish"
-    dest: "{{ HOME }}/.config/fish/functions"
+    - name: Install fisher
+      get_url:
+        url: "https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish"
+        dest: "{{ HOME }}/.config/fish/functions"
 
-- name: Install fisher plugins
-  shell: fish -c "fisher install danhper/fish-ssh-agent jorgebucaran/nvm.fish jethrokuan/z"
+    - name: Change default shell to fish
+      become: yes
+      user:
+        name: "{{ USER }}"
+        shell: /usr/bin/fish
 
-- name: Change default shell to fish
-  become: yes
-  user:
-    name: "{{ USER }}"
-    shell: /usr/bin/fish
+    - name: Install fisher plugins
+      shell: fish -c "fisher install danhper/fish-ssh-agent jorgebucaran/nvm.fish jethrokuan/z"

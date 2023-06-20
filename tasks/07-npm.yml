@@ -1,30 +1,35 @@
-- name: Install Node
-  become: yes
-  package:
-    - nodejs
+- name: Install Node and global npm packages
+  tags:
     - npm
-  state: present
+  block:
+    - name: Install Node
+      become: yes
+      package:
+        name:
+          - nodejs
+          - npm
+        state: present
 
-- name: Install pnpm
-  become: yes
-  npm:
-    name: pnpm
-    global: yes
+    - name: Install pnpm
+      become: yes
+      npm:
+        name: pnpm
+        global: yes
 
-- name: Install ESlint
-  become: yes
-  npm:
-    name: eslint
-    global: yes
+    - name: Install ESlint
+      become: yes
+      npm:
+        name: eslint
+        global: yes
 
-- name: Install Typescript
-  become: yes
-  npm:
-    name: typescript
-    global: yes
+    - name: Install Typescript
+      become: yes
+      npm:
+        name: typescript
+        global: yes
 
-- name: Install TS-Node
-  become: yes
-  npm:
-    name: ts-node
-    global: yes
+    - name: Install TS-Node
+      become: yes
+      npm:
+        name: ts-node
+        global: yes
