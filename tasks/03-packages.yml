@@ -57,3 +57,6 @@
         state: link
         force: yes
 
+    # Install lazygit binary
+    - name: Install lazygit
+      shell: "./scripts/lazygit.sh"
