@@ -5,10 +5,10 @@
   block:
     - name: Install anki, mpv, fcitx5
       become: yes
-      package:
+      pacman:
         state: present
         name:
-          - anki
+          # - anki-bin
           - mpv
           - fcitx5-mozc
           - fcitx5-configtool
@@ -19,3 +19,9 @@
         dest: "{{ HOME }}/.config/mpv/scripts/subs2srs"
         force: yes
         accept_hostkey: yes
+
+    - name: Stow dotfiles
+      shell: |
+        cd ~/.dotfiles
+        stow -t ~/ japanese/ --adopt
+        git reset --hard

@@ -13,7 +13,7 @@
     - name: Stow dotfiles
       shell: |
         cd ~/.dotfiles
-        stow -t ~/ */ --adopt
+        stow -t ~/ core/ --adopt
         git reset --hard
 
     - name: Source fish envs
