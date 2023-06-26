@@ -10,6 +10,7 @@
       - blueman
       - bluez
       - bluez-utils
+      - libqalculate
 
 - name: Install i3 pkgs
   tags:
@@ -44,6 +45,7 @@
           - foot
           - sway
           - waybar
+          - wl-copy
 
     - name: Stow sway configs
       shell: |
