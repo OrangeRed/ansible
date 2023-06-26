@@ -14,6 +14,7 @@
       - fd
       - fish
       - fzf
+      - keychain
       - lazygit
       - neofetch
       - stow
@@ -35,9 +36,10 @@
           - bat
           - btop
           - exa
-          - fd-find # fd is taken
+          - fd-find
           - fish
           - fzf
+          - keychain
           - neofetch
           - stow
           - powertop

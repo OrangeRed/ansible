@@ -1,3 +1,16 @@
+- name: Install shared pkgs
+  tags:
+    - i3
+    - sway
+    - never
+  become: yes
+  package:
+    state: present
+    name:
+      - blueman
+      - bluez
+      - bluez-utils
+
 - name: Install i3 pkgs
   tags:
     - i3
