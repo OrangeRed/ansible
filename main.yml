@@ -4,13 +4,13 @@
     USER: "{{ lookup('env', 'USER') }}"
 
   tasks:
-    - import_tasks: tasks/01-ssh.yml
-    - import_tasks: tasks/02-git.yml
-    - import_tasks: tasks/03-packages.yml
-    - import_tasks: tasks/04-fish.yml
-    - import_tasks: tasks/05-dotfiles.yml
-    - import_tasks: tasks/06-font.yml
-    - import_tasks: tasks/07-npm.yml
+    - import_tasks: tasks/00-core.yml
+    - import_tasks: tasks/01-git.yml
+    - import_tasks: tasks/02-fish.yml
+    - import_tasks: tasks/03-dotfiles.yml
+    - import_tasks: tasks/04-font.yml
+    - import_tasks: tasks/05-npm.yml
+    - import_tasks: tasks/06-wm.yml
 
     # TODO
     # - include_tasks: tasks/nvim.yml

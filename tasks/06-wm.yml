@@ -1,0 +1,39 @@
+- name: Install i3 pkgs
+  tags:
+    - i3
+    - never
+  block:
+    - name: Install i3 pkgs
+      become: yes
+      package:
+        state: present
+        name:
+          - alacritty
+          - i3-wm
+          - i3blocks
+
+    - name: Stow i3 configs
+      shell: |
+        cd ~/.dotfiles
+        stow -t ~/ i3/ --adopt
+        git reset --hard
+
+- name: Install sway pkgs
+  tags:
+    - sway
+    - never
+  block:
+    - name: Install sway pkgs
+      become: yes
+      package:
+        state: present
+        name:
+          - foot
+          - sway
+          - waybar
+
+    - name: Stow sway configs
+      shell: |
+        cd ~/.dotfiles
+        stow -t ~/ sway/ --adopt
+        git reset --hard

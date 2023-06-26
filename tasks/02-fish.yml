@@ -24,4 +24,4 @@
         shell: /usr/bin/fish
 
     - name: Install fisher plugins
-      shell: fish -c "fisher install danhper/fish-ssh-agent jorgebucaran/nvm.fish jethrokuan/z"
+      shell: fish -c "fisher install jorgebucaran/nvm.fish jethrokuan/z"

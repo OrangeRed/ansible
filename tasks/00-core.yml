@@ -1,13 +1,13 @@
-- name: Install pacman pkgs
+- name: Install core pacman pkgs
   become: yes
   tags:
-    - cli
+    - core
     - dotfiles
   when: ansible_facts['distribution'] == "Archlinux"
   pacman:
     state: present
     name:
-      - cmatrix
+      - curl
       - bat
       - btop
       - exa
@@ -20,9 +20,9 @@
       - powertop
 
 # Debian based Install
-- name: Install api pkgs
+- name: Install core apt pkgs
   tags:
-    - cli
+    - core
     - dotfiles
   when: ansible_facts['os_family'] == "Debian"
   block:
@@ -31,7 +31,7 @@
       apt:
         state: present
         name:
-          - cmatrix
+          - curl
           - bat
           - btop
           - exa
@@ -41,7 +41,6 @@
           - neofetch
           - stow
           - powertop
-          - xclip
 
     # Turn fd-find into fd
     - name: Create ~/.local/bin directory
