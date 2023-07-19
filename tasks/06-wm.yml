@@ -29,7 +29,7 @@
     - name: Stow i3 configs
       shell: |
         cd ~/.dotfiles
-        stow -t ~/ i3/ --adopt
+        stow --adopt -t ~/ i3/
         git reset --hard
 
 - name: Install sway pkgs
@@ -50,5 +50,10 @@
     - name: Stow sway configs
       shell: |
         cd ~/.dotfiles
-        stow -t ~/ sway/ --adopt
+        stow --adopt -t ~/ foot/
+        stow --adopt -t ~/ mako/
+        stow --adopt -t ~/ sway/
+        stow --adopt -t ~/ swaylock/
+        stow --adopt -t ~/ waybar/
+        stow --adopt -t ~/ wofi/
         git reset --hard

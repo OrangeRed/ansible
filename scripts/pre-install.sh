@@ -30,3 +30,7 @@ fi
 # Move private and public ssh keys to ~/.ssh
 cp "$private_key.pub" "$HOME/.ssh"
 mv "$private_key" "$HOME/.ssh"
+
+# Enable gnome-keyring ssh wrapper
+systemctl --user enable gcr-ssh-agent.socket
+systemctl --user enable gcr-ssh-agent.service

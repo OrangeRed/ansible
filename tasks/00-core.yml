@@ -14,9 +14,12 @@
       - fd
       - fish
       - fzf
-      - keychain
+      - gcr
+      - gnome-keyring
       - lazygit
+      - libsecret
       - neofetch
+      - seahorse
       - stow
       - powertop
 
@@ -39,8 +42,11 @@
           - fd-find
           - fish
           - fzf
-          - keychain
+          - gcr
+          - gnome-keyring
+          - libsecret
           - neofetch
+          - seahorse
           - stow
           - powertop
 

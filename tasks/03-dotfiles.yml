@@ -13,7 +13,14 @@
     - name: Stow dotfiles
       shell: |
         cd ~/.dotfiles
-        stow -t ~/ core/ --adopt
+        stow --adopt -t ~/ .wallpapers/
+        stow --adopt -t ~/ btop/
+        stow --adopt -t ~/ env.d/
+        stow --adopt -t ~/ fd/
+        stow --adopt -t ~/ fish/
+        stow --adopt -t ~/ neofetch/
+        stow --adopt -t ~/ ranger/
+        stow --adopt -t ~/ vscode/
         git reset --hard
 
     - name: Source fish envs

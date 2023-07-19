@@ -23,5 +23,6 @@
     - name: Stow dotfiles
       shell: |
         cd ~/.dotfiles
-        stow -t ~/ japanese/ --adopt
+        stow --adopt -t ~/ fcitx5/
+        stow --adopt -t ~/ mpv/
         git reset --hard
