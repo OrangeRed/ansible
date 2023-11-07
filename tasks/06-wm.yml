@@ -45,7 +45,7 @@
           - foot
           - sway
           - waybar
-          - wl-copy
+          - wl-clipboard
 
     - name: Stow sway configs
       shell: |

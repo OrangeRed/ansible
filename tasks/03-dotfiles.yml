@@ -24,4 +24,4 @@
         git reset --hard
 
     - name: Source fish envs
-      shell: fish -c "source ~/.dotfiles/core/.config/fish/conf.d/envs.fish"
+      shell: fish -c "source ~/.dotfiles/fish/.config/fish/conf.d/envs.fish"
