@@ -10,7 +10,10 @@
         name:
           # - anki-bin
           - mpv
+          - fcitx5
           - fcitx5-mozc
+          - fcitx5-gtk
+          - fcitx5-qt
           - fcitx5-configtool
 
     - name: Install mpvacious
