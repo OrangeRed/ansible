@@ -9,9 +9,15 @@
         state: directory
         mode: 0755
 
+    - name: Get Latest Monaspace font
+      uri:
+        url: https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest
+        return_content: true
+      register: res
+
     - name: Download Fira Code font
       unarchive:
-        src: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip"
+        src: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ res.json.tag_name }}/FiraCode.zip"
         dest: "{{ HOME }}/.fonts"
         remote_src: yes
 
